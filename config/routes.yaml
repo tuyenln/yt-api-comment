@@ -1,0 +1,11 @@
+i-am-alive:
+  path: /api/comment/i-am-alive
+  controller: App\IAmAlive\Infrastructure\IAmAliveController::index
+
+comment:
+  path: /api/comment/comment/{commentId}
+  controller: App\Comment\Infrastructure\CommentEndpoint::getCommentAsJson
+
+post-comment:
+  path: /api/comment/postcomment
+  controller: App\Comment\Infrastructure\CommentPostEndpoint::createComment

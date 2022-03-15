@@ -1,0 +1,21 @@
+parameters:
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: false      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    App\Comment\Infrastructure\CommentRepository:
+        class: Doctrine\ORM\Entity\EntityRepository
+        factory: ['@doctrine.orm.default_entity_manager', getRepository]
+        arguments:
+            - App\Comment\Domain\Entity\Comment
+
+    App\Comment\Infrastructure\CommentEndpoint:
+        arguments:
+            $commentRepository: '@App\Comment\Infrastructure\CommentRepository'
+
+    App\Comment\Infrastructure\CommentPostEndpoint:
+        arguments:
+            $eventBus: '@simple_bus.event_bus'
